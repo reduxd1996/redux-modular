@@ -39,7 +39,7 @@ class CreateModelCommand extends Command
                 foreach ($models as $value) {
                     $GenerateModelsPath = $moduleFolder . "/App/Models/{$value}.php";
                     if (file_exists($GenerateModelsPath)) {
-                        $this->error("Model {$value} in {$module} already exists");
+                        $this->error("Model {$value} in {$module} module already exists");
                     } else {
                         $generator->createModelFile($module, $GenerateModelsPath, $value);
                         if (file_exists($GenerateModelsPath)) {
@@ -57,7 +57,7 @@ class CreateModelCommand extends Command
             } else {
                 $GeneratePath = $moduleFolder . "/App/Models/{$model}.php";
                 if (file_exists($GeneratePath)) {
-                    $this->error("Model {$model} in {$module} already exists");
+                    $this->error("Model {$model} in {$module} module already exists");
                 } else {
                     $generator->createModelFile($module, $GeneratePath, $model);
                     if (file_exists($GeneratePath)) {
