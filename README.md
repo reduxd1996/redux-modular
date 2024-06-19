@@ -62,13 +62,13 @@ php artisan redux:make-controller <Module> <ControllerName>
 To generate multiple controllers, you can separate the controllers with a comma. For example: 
 
 ```
-php artisan redux:make-controller <Module> TestController,TestNewController
+php artisan redux:make-controller <Module> <ControllerName>,<OtherControllerName>
 ```
 
 For an API controller, you can use the --api flag, the --resource flag, or both.
 
 ```
-php artisan redux:make-controller <Module> TestController,TestNewController --api --resource
+php artisan redux:make-controller <Module> <ControllerName>,<OtherControllerName> --api --resource
 ```
 
 # Create Models
@@ -82,13 +82,13 @@ php artisan redux:make-model <Module> <Model>
 To generate multiple model, you can separate the model with a comma. For example: 
 
 ```
-php artisan redux:make-model <Module> User,Contact
+php artisan redux:make-model <Module> <Model>,<OtherModel>
 ```
 
 To generate migrations for your models, you can use "--m" flags:
 
 ```
-php artisan redux:make-model <Module> User,Contact --m
+php artisan redux:make-model <Module> <Model>,<OtherModel> --m
 ```
 
 # Create Requests
