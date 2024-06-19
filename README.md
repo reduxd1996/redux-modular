@@ -13,7 +13,9 @@ This package simplifies the process of creating structured modules in a Laravel 
 # Installation
 To install this package, run the following command in your Laravel project directory:
 
+```
 composer require redux/modular
+```
 
 # Create Modules
 To create a module, use the following command:
