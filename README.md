@@ -93,4 +93,4 @@ php artisan redux:make-model <Module> User,Contact --m
 
 ## License
 
-This project is licensed under the MIT License. See the [MIT license](LICENSE.md) file for details.
+This project is licensed under the MIT License. See the [MIT license](LICENSE) file for details.
