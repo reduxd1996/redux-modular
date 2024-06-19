@@ -91,6 +91,17 @@ To generate migrations for your models, you can use "--m" flags:
 php artisan redux:make-model <Module> User,Contact --m
 ```
 
+# Create Requests
+
+To create a new request within a module, use the following command:
+
+```
+php artisan redux:make-request <Module> <RequestName>
+```
+
+
+
+
 ## License
 
 This project is licensed under the MIT License. See the [MIT license](LICENSE) file for details.
