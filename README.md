@@ -8,8 +8,8 @@ This package simplifies the process of creating structured modules in a Laravel 
 
 # Requirements
 
-- PHP >= 8.x
-- Laravel >= 8.x
+- PHP >= 8.0
+- Laravel >= 9.x
 
 # Installation
 
