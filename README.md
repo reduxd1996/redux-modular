@@ -7,9 +7,10 @@ This repository provides a set of artisan commands to generate modules, controll
 This package simplifies the process of creating structured modules in a Laravel application, ensuring consistency and adherence to best practices.
 
 # Requirements
-- PHP >= 7.4
+- PHP >= 8.x
 - Laravel >= 8.x
 
+# Installation
 First add the following to your Composer autoload configuration in composer.json:
 
 ```
@@ -27,7 +28,12 @@ It should look like this:
 }
 ```
 
-# Installation
+Then, run:
+
+```
+composer dump-autoload
+```
+
 Then install the following command in your Laravel project directory:
 
 ```
@@ -51,3 +57,8 @@ php artisan redux:make-controller <Module> <ControllerName>
 ```
 
 You need to provide the name of the module and the controller.
+If you want to generate multiple controllers, you can add , between controllers you want to generate, example: 
+
+```
+php artisan redux:make-controller <Module> TestController,TestNewController
+```
