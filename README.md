@@ -17,10 +17,14 @@ composer require redux/modular
 
 # Create Modules
 To create a module, use the following command:
+
 php artisan redux:make-module <Module>
+
 This command will generate the necessary folders and files for your module.
 
 # Create Controllers
 To create a controller, use the following command:
+
 php artisan redux:make-controller <Module> <ControllerName>
+
 You need to provide the name of the module and the controller.
