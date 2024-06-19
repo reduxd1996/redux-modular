@@ -65,7 +65,7 @@ To generate multiple controllers, you can separate the controllers with a comma.
 php artisan redux:make-controller <Module> TestController,TestNewController
 ```
 
-For API you can also use "--api" or "--resource" or both
+For an API controller, you can use the --api flag, the --resource flag, or both.
 
 ```
 php artisan redux:make-controller <Module> TestController,TestNewController --api --resource
