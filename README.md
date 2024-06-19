@@ -1,0 +1,2 @@
+# redux-modular
+Laravel modular
