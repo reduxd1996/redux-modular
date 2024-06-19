@@ -38,7 +38,6 @@ class ReduxModuleServiceProvider extends ServiceProvider
         $modules_folders = $this->getModulesFolder();
 
         $module_prefix = config('redux-modular.modulePath');
-        $allClasses = get_declared_classes();
 
         foreach ($modules_folders as $module) {
             //Module Service Provider must have a prefix of the module name. example User Module the service provider must be UserServiceProvider
@@ -65,18 +64,15 @@ class ReduxModuleServiceProvider extends ServiceProvider
 
         $modulesFolders = [];
         // Check if the directory exists
-
         if (is_dir($directory)) {
             // Scan the directory and get all items
             $items = scandir($directory);
-
             // Loop through the items
             foreach ($items as $item) {
                 // Skip the current and parent directory references
                 if ($item !== '.' && $item !== '..') {
                     // Full path of the item
                     $itemPath = $directory . DIRECTORY_SEPARATOR . $item;
-
                     // Check if the item is a directory and exclude some folder ex. Template
                     if (is_dir($itemPath)) {
                         $modulesFolders[] = $item;
@@ -84,7 +80,6 @@ class ReduxModuleServiceProvider extends ServiceProvider
                 }
             }
         }
-
         return $modulesFolders;
     }
 
@@ -94,19 +89,16 @@ class ReduxModuleServiceProvider extends ServiceProvider
         $directory = __DIR__.'/Console/Commands';
 
         $commandFolders = [];
-
         // Check if the directory exists
         if (is_dir($directory)) {
             // Scan the directory and get all items
             $items = scandir($directory);
-
             // Loop through the items
             foreach ($items as $item) {
                 // Skip the current and parent directory references
                 if ($item !== '.' && $item !== '..') {
                     // Full path of the item
                     $itemPath = $directory . DIRECTORY_SEPARATOR . $item;
-
                     // Check if the item is a directory and exclude some folder ex. Template
                     if (file_exists($itemPath)) {
                         $commandFolders[] = $item;
