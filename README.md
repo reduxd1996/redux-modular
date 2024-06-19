@@ -7,10 +7,12 @@ This repository provides a set of artisan commands to generate modules, controll
 This package simplifies the process of creating structured modules in a Laravel application, ensuring consistency and adherence to best practices.
 
 # Requirements
+
 - PHP >= 8.x
 - Laravel >= 8.x
 
 # Installation
+
 First add the following to your Composer autoload configuration in composer.json:
 
 ```
@@ -41,6 +43,7 @@ composer require redux/modular
 ```
 
 # Create Modules
+
 To create a module, use the following command:
 
 ```
@@ -50,6 +53,7 @@ php artisan redux:make-module <Module>
 This command will generate the necessary folders and files for your module.
 
 # Create Controllers
+
 To create a controller, use the following command:
 
 ```
@@ -68,6 +72,7 @@ php artisan redux:make-controller <Module> TestController,TestNewController --ap
 ```
 
 # Create Models
+
 To create a model, use the following command:
 
 ```
@@ -86,3 +91,6 @@ To generate migrations for your models, you can use "--m" flags:
 php artisan redux:make-model <Module> User,Contact --m
 ```
 
+## License
+
+This project is licensed under the MIT License. See the [MIT license](LICENSE.md) file for details.
