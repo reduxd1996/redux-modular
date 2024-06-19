@@ -10,8 +10,25 @@ This package simplifies the process of creating structured modules in a Laravel 
 - PHP >= 7.4
 - Laravel >= 8.x
 
+First add the following to your Composer autoload configuration in composer.json:
+
+```
+"Modules\\": "Modules/"
+```
+
+It should look like this:
+
+```
+"autoload": {
+    "psr-4": {
+        "App\\": "app/",
+        "Modules\\": "Modules/"
+    }
+}
+```
+
 # Installation
-To install this package, run the following command in your Laravel project directory:
+Then install the following command in your Laravel project directory:
 
 ```
 composer require redux/modular
