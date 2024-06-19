@@ -1,14 +1,14 @@
 # Redux-modular
 Laravel modular Architecture
 
-This repository provides a set of artisan commands to generate modules, controllers, requests, resources, and models in a Laravel application.
+This repository offers a collection of Artisan commands designed to generate modules, controllers, requests, resources, models, and more within a Laravel application.
 
 # Introduction
 This package simplifies the process of creating structured modules in a Laravel application, ensuring consistency and adherence to best practices.
 
 # Requirements
 
-- PHP >= 8.0
+- PHP >= 8.1
 - Laravel >= 9.x
 
 # Installation
