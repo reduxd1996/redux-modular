@@ -1,0 +1,23 @@
+<?php
+
+namespace {{namespace}}App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+class {{class}}ServiceProvider extends ServiceProvider {
+
+    public function boot(): void
+    {
+        $currentFileDirectory = __DIR__;
+
+        $parentDirectory = dirname($currentFileDirectory);
+
+        $grandParentDirectory = dirname($parentDirectory);
+
+        $moduleName = basename($grandParentDirectory);
+        $this->loadMigrationsFrom("{{module}}/{$moduleName}/Database/Migrations");
+        $this->loadViewsFrom("{{module}}/{$moduleName}/views", $moduleName);
+        $this->app->register(RouteServiceProvider::class);
+    }
+
+}
