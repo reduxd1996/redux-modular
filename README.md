@@ -55,10 +55,28 @@ To create a controller, use the following command:
 ```
 php artisan redux:make-controller <Module> <ControllerName>
 ```
-
-You need to provide the name of the module and the controller.
-If you want to generate multiple controllers, you can add , between controllers you want to generate, example: 
+To generate multiple controllers, you can separate the controllers with a comma. For example: 
 
 ```
 php artisan redux:make-controller <Module> TestController,TestNewController
 ```
+
+# Create Models
+To create a model, use the following command:
+
+```
+php artisan redux:make-model <Module> <Model>
+```
+
+To generate multiple model, you can separate the model with a comma. For example: 
+
+```
+php artisan redux:make-model <Module> User,Contact
+```
+
+To generate migrations for your models, you can use "--m" flags:
+
+```
+php artisan redux:make-model <Module> User,Contact --m
+```
+
