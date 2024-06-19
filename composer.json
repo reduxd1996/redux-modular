@@ -1,0 +1,34 @@
+{
+    "name": "redux/modular",
+    "description": "Modular Architecture",
+    "type": "package",
+    "license": "MIT",
+    "keywords": [
+        "laravel-modular",
+        "modular",
+        "modular architecture"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Redux\\Modular\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers" : [
+                "Redux\\Modular\\ReduxModuleServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Eduardo T. Morales",
+            "email": "reduxd1996@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.6",
+        "illuminate/support": ">=5.4"
+    }
+}

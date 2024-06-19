@@ -1,0 +1,8 @@
+<?php
+
+namespace {{namespace}}App\Traits;
+
+class {{class}}
+{
+
+}

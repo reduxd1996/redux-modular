@@ -1,0 +1,11 @@
+<?php
+
+namespace {{namespace}}App\Services;
+
+use Illuminate\Support\Facades\Auth;
+use {{namespace}}App\Models\{{class}};
+use {{namespace}}App\Http\Resources\{{class}}Resource;
+
+class {{class}}Service {
+
+}
