@@ -99,6 +99,21 @@ To create a new request within a module, use the following command:
 php artisan redux:make-request <Module> <RequestName>
 ```
 
+# Create Resources
+
+To create a new resource within a module, use the following command:
+
+```
+php artisan redux:make-resource <Module> <ResourceName>
+```
+
+# Create Services
+
+To create a new resource within a module, use the following command:
+
+```
+php artisan redux:make-service <Module> <ServiceName>
+```
 
 
 
