@@ -115,7 +115,19 @@ To create a new resource within a module, use the following command:
 php artisan redux:make-service <Module> <ServiceName>
 ```
 
+# Create Tests
 
+To create a new feature tests within a module, use the following command:
+
+```
+php artisan redux:make-test <Module> <TestName>
+```
+
+If you want to create a new unit tests within a module, use the following command:
+
+```
+php artisan redux:make-test <Module> <TestName> --unit
+```
 
 ## License
 
