@@ -2,7 +2,7 @@
 
 namespace {{namespace}}App\Traits;
 
-class {{class}}
+trait {{class}}
 {
 
 }

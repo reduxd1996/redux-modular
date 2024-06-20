@@ -2,7 +2,7 @@
 
 namespace {{namespace}}App\Interfaces;
 
-class {{class}}
+interface {{class}}
 {
 
 }
