@@ -30,8 +30,17 @@ class CreateInterfacesCommand extends Command
         $modulesPathFolder = rtrim($module_path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $moduleFolder = $modulesPathFolder . $module;
 
+        $interfacesPathFolder =  $moduleFolder . "/App/Interfaces/";
 
-        $GeneratePath = $moduleFolder . "/App/Interfaces/{$interface}.php";
+        $GeneratePath = "{$interfacesPathFolder}{$interface}.php";
+
+
+        if (!is_dir($interfacesPathFolder)) {
+            if (!mkdir($interfacesPathFolder, 0755, true)) {
+                throw new \Exception("Failed to create directory: Interfaces Folder");
+                exit;
+            }
+        }
 
         if (is_dir($moduleFolder)) {
             if (file_exists($GeneratePath)) {

@@ -12,17 +12,9 @@ class ModuleGenerator extends Generator {
                     'Controllers',
                     'Requests',
                     'Resources',
-                    'Middlewares'
                 ],
                 'Models',
-                'Exports',
-                'Imports',
-                'Rules',
-                'Providers',
-                'Traits',
-                'Services',
-                'Interfaces',
-                'Policies'
+                'Providers'
             ],
             'Database' => [
                 'Factories',

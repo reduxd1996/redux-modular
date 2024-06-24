@@ -10,13 +10,14 @@ class CreateMiddlewaresCommand extends Command
     protected $signature = 'redux:make-middleware
     {module     : The name of the module}
     {middleware : The name of the middleware}';
+
     protected $description = 'Create new module middleware';
 
     public function handle()
     {
         $module_path = config('redux-modular.modulePath');
 
-        $module = ucfirst($this->argumente('module'));
+        $module = ucfirst($this->argument('module'));
 
         $middleware = ucfirst($this->argument('middleware'));
         if (empty($module)) {
@@ -29,7 +30,17 @@ class CreateMiddlewaresCommand extends Command
         $modulesPathFolder = rtrim($module_path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $moduleFolder = $modulesPathFolder . $module;
 
-        $GeneratePath = $moduleFolder . "/App/Http/Middlewares/{$middleware}.php";
+        $middlewaresPathFolder =  $moduleFolder . "/App/Http/Middlewares/";
+
+        $GeneratePath = "{$middlewaresPathFolder}{$middleware}.php";
+
+        if (!is_dir($middlewaresPathFolder)) {
+            if (!mkdir($middlewaresPathFolder, 0755, true)) {
+                throw new \Exception("Failed to create directory: Middlewares Folder");
+                exit;
+            }
+        }
+
         if (is_dir($moduleFolder)) {
             if (file_exists($GeneratePath)) {
                 $this->error("Middleware {$middleware} in {$module} already exists");

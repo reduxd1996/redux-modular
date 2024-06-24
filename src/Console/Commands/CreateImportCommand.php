@@ -5,12 +5,12 @@ namespace Redux\Modular\Console\Commands;
 use Illuminate\Console\Command;
 use Redux\Modular\Console\Generators\FileGenerator;
 
-class CreateRulesCommand extends Command
+class CreateImportCommand extends Command
 {
-    protected $signature = 'redux:make-rule
-    {module    : The name of the module}
-    {rule         : The name of the rule}';
-    protected $description = 'Create new module rule';
+    protected $signature = 'redux:make-import
+    {module      : The name of the module}
+    {import      : The name of the import}';
+    protected $description = 'Create new module import';
 
     public function handle()
     {
@@ -18,8 +18,7 @@ class CreateRulesCommand extends Command
 
         $module = ucfirst($this->argument('module'));
 
-        $rule = ucfirst($this->argument('rule'));
-
+        $import = ucfirst($this->argument('import'));
         if (empty($module)) {
             $this->error("module is required");
             return;
@@ -28,27 +27,27 @@ class CreateRulesCommand extends Command
         $generator = new FileGenerator;
 
         $modulesPathFolder = rtrim($module_path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-
         $moduleFolder = $modulesPathFolder . $module;
 
-        $rulesPathFolder =  $moduleFolder . "/App/Rules/";
+        $importPathFolder =  $moduleFolder . "/App/Imports/";
 
-        $GeneratePath = "{$rulesPathFolder}{$rule}.php";
+        $GeneratePath = "{$importPathFolder}{$import}.php";
 
-        if (!is_dir($rulesPathFolder)) {
-            if (!mkdir($rulesPathFolder, 0755, true)) {
-                throw new \Exception("Failed to create directory: Rules Folder");
+
+        if (!is_dir($importPathFolder)) {
+            if (!mkdir($importPathFolder, 0755, true)) {
+                throw new \Exception("Failed to create directory: Imports Folder");
                 exit;
             }
         }
 
         if (is_dir($moduleFolder)) {
             if (file_exists($GeneratePath)) {
-                $this->error("Rule {$rule} in {$module} already exists");
+                $this->error("Import {$import} in {$module} already exists");
             } else {
-                $generator->createFile($module, $GeneratePath, $rule, 'rules');
+                $generator->createFile($module, $GeneratePath, $import, 'imports');
                 if (file_exists($GeneratePath)) {
-                    $this->info("Created Rule {$rule} in {$module} module");
+                    $this->info("Created Import {$import} in {$module} module");
                 }
             }
         } else {

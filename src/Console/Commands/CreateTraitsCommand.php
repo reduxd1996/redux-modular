@@ -30,8 +30,16 @@ class CreateTraitsCommand extends Command
         $modulesPathFolder = rtrim($module_path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $moduleFolder = $modulesPathFolder . $module;
 
+        $traitsPathFolder =  $moduleFolder . "/App/Traits/";
 
-        $GeneratePath = $moduleFolder . "/App/Traits/{$trait}.php";
+        $GeneratePath = "{$traitsPathFolder}{$trait}.php";
+
+        if (!is_dir($traitsPathFolder)) {
+            if (!mkdir($traitsPathFolder, 0755, true)) {
+                throw new \Exception("Failed to create directory: Traits Folder");
+                exit;
+            }
+        }
 
         if (is_dir($moduleFolder)) {
             if (file_exists($GeneratePath)) {

@@ -29,7 +29,17 @@ class CreateServicesCommand extends Command
         $modulesPathFolder = rtrim($module_path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $moduleFolder = $modulesPathFolder . $module;
 
-        $GeneratePath = $moduleFolder . "/App/Services/{$service}.php";
+        $servicesPathFolder =  $moduleFolder . "/App/Services/";
+
+        $GeneratePath = "{$servicesPathFolder}{$service}.php";
+
+
+        if (!is_dir($servicesPathFolder)) {
+            if (!mkdir($servicesPathFolder, 0755, true)) {
+                throw new \Exception("Failed to create directory: Services Folder");
+                exit;
+            }
+        }
 
         if (is_dir($moduleFolder)) {
             if (file_exists($GeneratePath)) {

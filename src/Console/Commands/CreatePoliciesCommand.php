@@ -29,7 +29,17 @@ class CreatePoliciesCommand extends Command
         $modulesPathFolder = rtrim($module_path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $moduleFolder = $modulesPathFolder . $module;
 
-        $GeneratePath = $moduleFolder . "/App/Policies/{$policy}.php";
+        $policiesPathFolder =  $moduleFolder . "/App/Services/";
+
+        $GeneratePath = "{$policiesPathFolder}{$policy}.php";
+
+        if (!is_dir($policiesPathFolder)) {
+            if (!mkdir($policiesPathFolder, 0755, true)) {
+                throw new \Exception("Failed to create directory: Policies Folder");
+                exit;
+            }
+        }
+
         if (is_dir($moduleFolder)) {
             if (file_exists($GeneratePath)) {
                 $this->error("Policy {$policy} in {$module} already exists");
