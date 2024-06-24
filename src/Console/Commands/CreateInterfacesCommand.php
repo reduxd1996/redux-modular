@@ -21,7 +21,7 @@ class CreateInterfacesCommand extends Command
         $interface = ucfirst($this->argument('interface'));
 
         if (empty($module)) {
-            $this->error("--module= is required");
+            $this->components->error("--module= is required");
             return;
         }
 
@@ -34,25 +34,24 @@ class CreateInterfacesCommand extends Command
 
         $GeneratePath = "{$interfacesPathFolder}{$interface}.php";
 
-
-        if (!is_dir($interfacesPathFolder)) {
-            if (!mkdir($interfacesPathFolder, 0755, true)) {
-                throw new \Exception("Failed to create directory: Interfaces Folder");
-                exit;
-            }
-        }
-
         if (is_dir($moduleFolder)) {
+            if (!is_dir($interfacesPathFolder)) {
+                if (!mkdir($interfacesPathFolder, 0755, true)) {
+                    throw new \Exception("Failed to create directory: Interfaces Folder");
+                    exit;
+                }
+            }
+
             if (file_exists($GeneratePath)) {
-                $this->error("Interface {$interface} in {$module} already exists");
+                $this->components->error("Interface [{$GeneratePath}] already exists.");
             } else {
                 $generator->createFile($module, $GeneratePath, $interface, 'interfaces');
                 if (file_exists($GeneratePath)) {
-                    $this->info("Created Interface {$interface} in {$module} module");
+                    $this->components->info("Created Interface [{$GeneratePath}] successfully.");
                 }
             }
         } else {
-            $this->error("Module {$module} doesn't exists");
+            $this->components->error("Module [{$module}] doesn't exists.");
         }
     }
 }

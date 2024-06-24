@@ -7,7 +7,7 @@ use Redux\Modular\Console\Generators\FileGenerator;
 
 class CreatePoliciesCommand extends Command
 {
-    protected $signature = 'redux:make-service
+    protected $signature = 'redux:make-policy
     {module      : The name of the module}
     {policy      : The name of the policy}';
     protected $description = 'Create new module policy';
@@ -29,28 +29,28 @@ class CreatePoliciesCommand extends Command
         $modulesPathFolder = rtrim($module_path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $moduleFolder = $modulesPathFolder . $module;
 
-        $policiesPathFolder =  $moduleFolder . "/App/Services/";
+        $policiesPathFolder =  $moduleFolder . "/App/Policies/";
 
         $GeneratePath = "{$policiesPathFolder}{$policy}.php";
 
-        if (!is_dir($policiesPathFolder)) {
-            if (!mkdir($policiesPathFolder, 0755, true)) {
-                throw new \Exception("Failed to create directory: Policies Folder");
-                exit;
-            }
-        }
-
         if (is_dir($moduleFolder)) {
+            if (!is_dir($policiesPathFolder)) {
+                if (!mkdir($policiesPathFolder, 0755, true)) {
+                    throw new \Exception("Failed to create directory: Policies Folder");
+                    exit;
+                }
+            }
+
             if (file_exists($GeneratePath)) {
-                $this->error("Policy {$policy} in {$module} already exists");
+                $this->components->error("Policy [{$GeneratePath}] already exists.");
             } else {
                 $generator->createFile($module, $GeneratePath, $policy, 'normalpolicy');
                 if (file_exists($GeneratePath)) {
-                    $this->info("Created Policy {$policy} in {$module} module");
+                    $this->components->info("Created Policy [{$GeneratePath}] successfully.");
                 }
             }
         } else {
-            $this->error("Module {$module} doesn't exists");
+            $this->components->error("Module [{$module}] doesn't exists.");
         }
     }
 }

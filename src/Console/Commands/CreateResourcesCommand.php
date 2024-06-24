@@ -20,7 +20,7 @@ class CreateResourcesCommand extends Command
 
         $resource = ucfirst($this->argument('resource'));
         if (empty($module)) {
-            $this->error("module is required");
+            $this->components->error("module is required");
             return;
         }
 
@@ -32,15 +32,15 @@ class CreateResourcesCommand extends Command
         $GeneratePath = $moduleFolder . "/App/Http/Resources/{$resource}.php";
         if (is_dir($moduleFolder)) {
             if (file_exists($GeneratePath)) {
-                $this->error("Resource {$resource} in {$module} already exists");
+                $this->components->error("Resource [{$GeneratePath}] already exists.");
             } else {
                 $generator->createFile($module, $GeneratePath, $resource, 'normalresource');
                 if (file_exists($GeneratePath)) {
-                    $this->info("Created Resource {$resource} in {$module} module");
+                    $this->components->info("Created Resource [{$GeneratePath}] successfully.");
                 }
             }
         } else {
-            $this->error("Module {$module} doesn't exists");
+            $this->components->error("Module [{$module}] doesn't exists.");
         }
     }
 }

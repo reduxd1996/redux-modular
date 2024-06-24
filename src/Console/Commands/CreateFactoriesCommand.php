@@ -10,6 +10,7 @@ class CreateFactoriesCommand extends Command
     protected $signature = 'redux:make-factory
     {module     : The name of the module}
     {factory    : The name of the factory}';
+
     protected $description = 'Create new module factory';
 
     public function handle()
@@ -21,7 +22,7 @@ class CreateFactoriesCommand extends Command
         $factory = ucfirst($this->argument('factory'));
 
         if (empty($module)) {
-            $this->error("module is required");
+            $this->components->error("module is required");
             return;
         }
 
@@ -35,15 +36,15 @@ class CreateFactoriesCommand extends Command
 
         if (is_dir($moduleFolder)) {
             if (file_exists($GeneratePath)) {
-                $this->error("Factory {$factoryName} in {$module} already exists");
+                $this->components->error("Factory [{$GeneratePath}] already exists.");
             } else {
                 $generator->createFile($module, $GeneratePath, $factoryName, 'factories');
                 if (file_exists($GeneratePath)) {
-                    $this->info("Created Factory {$factoryName} in {$module} module");
+                    $this->components->info("Created Factory [{$GeneratePath}] successfully.");
                 }
             }
         } else {
-            $this->error("Module {$module} doesn't exists");
+            $this->components->error("Module [{$module}] doesn't exists.");
         }
     }
 

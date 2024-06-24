@@ -4,7 +4,6 @@ namespace Redux\Modular\Console\Commands;
 
 use Illuminate\Console\Command;
 use Redux\Modular\Console\Generators\ModuleGenerator;
-use Redux\Modular\Console\Generators\FileGenerator;
 
 class CreateModuleCommand extends Command
 {
@@ -18,7 +17,7 @@ class CreateModuleCommand extends Command
         $module = ucfirst($this->argument('module'));
 
         if (empty($module)) {
-            $this->error("module is required");
+            $this->components->error("module is required");
             return;
         }
 
@@ -42,12 +41,12 @@ class CreateModuleCommand extends Command
                     $generate_module_folders = $generator->createModuleFolder($module_path, $module);
 
                     if ($generate_module_folders) {
-                        $this->info("Generated {$module} module scaffolding");
+                        $this->components->info("Generated [{$module}] scaffolding successfully.");
                     } else {
-                        $this->error("Error on creating {$module} module scaffolding");
+                        $this->components->error("Error on creating [{$module}] scaffolding.");
                     }
                 } else {
-                    $this->error("Module {$module} already exists");
+                    $this->components->error("Module [{$module}] already exists.");
                 }
             }
         }

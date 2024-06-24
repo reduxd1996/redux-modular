@@ -20,7 +20,7 @@ class CreateRequestCommand extends Command
 
         $request = ucfirst($this->argument('request'));
         if (empty($module)) {
-            $this->error("module is required");
+            $this->components->error("module is required");
             return;
         }
 
@@ -30,17 +30,18 @@ class CreateRequestCommand extends Command
         $moduleFolder = $modulesPathFolder . $module;
 
         $GeneratePath = $moduleFolder . "/App/Http/Requests/{$request}.php";
+
         if (is_dir($moduleFolder)) {
             if (file_exists($GeneratePath)) {
-                $this->error("Request {$request} in {$module} already exists");
+                $this->components->error("Request [{$GeneratePath}] already exists.");
             } else {
                 $generator->createFile($module, $GeneratePath, $request, 'normalrequest');
                 if (file_exists($GeneratePath)) {
-                    $this->info("Created Request {$request} in {$module} module");
+                    $this->components->info("Created Request [{$GeneratePath}] successfully.");
                 }
             }
         } else {
-            $this->error("Module {$module} doesn't exists");
+            $this->components->error("Module [{$module}] doesn't exists.");
         }
     }
 }

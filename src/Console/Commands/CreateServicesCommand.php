@@ -20,7 +20,7 @@ class CreateServicesCommand extends Command
 
         $service = ucfirst($this->argument('service'));
         if (empty($module)) {
-            $this->error("module is required");
+            $this->components->error("module is required");
             return;
         }
 
@@ -33,25 +33,24 @@ class CreateServicesCommand extends Command
 
         $GeneratePath = "{$servicesPathFolder}{$service}.php";
 
-
-        if (!is_dir($servicesPathFolder)) {
-            if (!mkdir($servicesPathFolder, 0755, true)) {
-                throw new \Exception("Failed to create directory: Services Folder");
-                exit;
-            }
-        }
-
         if (is_dir($moduleFolder)) {
+            if (!is_dir($servicesPathFolder)) {
+                if (!mkdir($servicesPathFolder, 0755, true)) {
+                    throw new \Exception("Failed to create directory: Services Folder");
+                    exit;
+                }
+            }
+
             if (file_exists($GeneratePath)) {
-                $this->error("Service {$service} in {$module} already exists");
+                $this->components->error("Service [{$GeneratePath}] already exists.");
             } else {
                 $generator->createFile($module, $GeneratePath, $service,'normalservice');
                 if (file_exists($GeneratePath)) {
-                    $this->info("Created Service {$service} in {$module} module");
+                    $this->components->info("Created Service [{$GeneratePath}] successfully.");
                 }
             }
         } else {
-            $this->error("Module {$module} doesn't exists");
+            $this->components->error("Module [{$module}] doesn't exists.");
         }
     }
 

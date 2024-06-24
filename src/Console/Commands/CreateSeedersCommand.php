@@ -21,7 +21,7 @@ class CreateSeedersCommand extends Command
         $seeder = ucfirst($this->argument('seeder'));
 
         if (empty($module)) {
-            $this->error("module is required");
+            $this->components->error("module is required");
             return;
         }
 
@@ -35,15 +35,15 @@ class CreateSeedersCommand extends Command
 
         if (is_dir($moduleFolder)) {
             if (file_exists($GeneratePath)) {
-                $this->error("Seeder {$seeder} in {$module} already exists");
+                $this->components->error("Seeder [{$GeneratePath}] already exists.");
             } else {
                 $generator->createFile($module, $GeneratePath, $seeder, 'seeders');
                 if (file_exists($GeneratePath)) {
-                    $this->info("Created Seeder {$seeder} in {$module} module");
+                    $this->components->info("Created Seeder [{$GeneratePath}] successfully.");
                 }
             }
         } else {
-            $this->error("Module {$module} doesn't exists");
+            $this->components->error("Module [{$module}] doesn't exists");
         }
     }
 

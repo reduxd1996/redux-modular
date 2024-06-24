@@ -20,7 +20,7 @@ class CreateExportCommand extends Command
 
         $export = ucfirst($this->argument('export'));
         if (empty($module)) {
-            $this->error("module is required");
+            $this->components->error("module is required");
             return;
         }
 
@@ -33,25 +33,24 @@ class CreateExportCommand extends Command
 
         $GeneratePath = "{$exportsPathFolder}{$export}.php";
 
-
-        if (!is_dir($exportsPathFolder)) {
-            if (!mkdir($exportsPathFolder, 0755, true)) {
-                throw new \Exception("Failed to create directory: Exports Folder");
-                exit;
-            }
-        }
-
         if (is_dir($moduleFolder)) {
+            if (!is_dir($exportsPathFolder)) {
+                if (!mkdir($exportsPathFolder, 0755, true)) {
+                    throw new \Exception("Failed to create directory: Exports Folder");
+                    exit;
+                }
+            }
+
             if (file_exists($GeneratePath)) {
-                $this->error("Export {$export} in {$module} already exists");
+                $this->components->error("Export [{$GeneratePath}] already exists");
             } else {
                 $generator->createFile($module, $GeneratePath, $export, 'exports');
                 if (file_exists($GeneratePath)) {
-                    $this->info("Created Export {$export} in {$module} module");
+                    $this->components->info("Created Export [{$GeneratePath}] successfully.");
                 }
             }
         } else {
-            $this->error("Module {$module} doesn't exists");
+            $this->components->error("Module {$module} doesn't exists");
         }
     }
 }

@@ -25,7 +25,7 @@ class CreateControllerCommand extends Command
         $isApi = $this->option('api');
 
         if (empty($module)) {
-            $this->error("module= is required");
+            $this->components->error("module= is required");
             return;
         }
 
@@ -40,28 +40,27 @@ class CreateControllerCommand extends Command
                 foreach($controllers as $controller){
                     $generatePath = $moduleFolder . "/App/Http/Controllers/{$controller}.php";
                     if (file_exists($generatePath)) {
-                        $this->error("{$controller} in {$module} already exists");
+                        $this->components->error("Controller [{$generatePath}] already exists.");
                     } else {
                         $generator->createControllerFile($module, $controller, $generatePath, $isResource, $isApi);
                         if (file_exists($generatePath)) {
-                            $this->info("Created {$controller} in {$module} module");
+                            $this->components->info("Create Controller [{$generatePath}] successfully.");
                         }
                     }
                 }
             } else {
                 $generatePath = $moduleFolder . "/App/Http/Controllers/{$controller}.php";
                 if (file_exists($generatePath)) {
-                    $this->error("{$controller} in module {$module} already exists");
+                    $this->components->error("Controller [{$generatePath}] already exists.");
                 } else {
                     $generator->createControllerFile($module, $controller, $generatePath, $isResource, $isApi);
                     if (file_exists($generatePath)) {
-                        $this->info("Created {$controller} in {$module} module");
+                        $this->components->info("Create Controller [{$generatePath}] successfully.");
                     }
                 }
             }
-
         } else {
-            $this->error("Module {$module} doesn't exists");
+            $this->components->error("Module [{$module}] doesn't exists.");
         }
     }
 

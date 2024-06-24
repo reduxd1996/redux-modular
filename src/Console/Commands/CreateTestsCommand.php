@@ -23,7 +23,7 @@ class CreateTestsCommand extends Command
         $isUnit = $this->option('unit');
 
         if (empty($module)) {
-            $this->error("module is required");
+            $this->components->error("module is required");
             return;
         }
 
@@ -33,21 +33,19 @@ class CreateTestsCommand extends Command
         $modulesPathFolder = rtrim($module_path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $moduleFolder = $modulesPathFolder . $module;
         $testName = $this->AddTestSuffix($test);
-
+        $test_type = $isUnit ? 'Unit' : 'Feature';
         $GeneratePath = $moduleFolder . "/tests/{$sub_test_folder}/{$testName}.php";
-
         if (is_dir($moduleFolder)) {
             if (file_exists($GeneratePath)) {
-                $this->error("Test {$testName} in {$module} module already exists");
+                $this->components->error("{$test_type} Test [{$GeneratePath}] already exists.");
             } else {
                 $generator->createFile($module, $GeneratePath, $testName, $stub);
                 if (file_exists($GeneratePath)) {
-                    $test_type = $isUnit ? 'unit' : 'feature';
-                    $this->info("Created {$test_type} test {$testName} in {$module} module");
+                    $this->components->info("Created {$test_type} Test [{$GeneratePath}] successfully.");
                 }
             }
         } else {
-            $this->error("Module {$module} doesn't exists");
+            $this->components->error("Module [{$module}] doesn't exists.");
         }
     }
 

@@ -21,7 +21,7 @@ class CreateTraitsCommand extends Command
         $trait = ucfirst($this->argument('trait'));
 
         if (empty($module)) {
-            $this->error("module is required");
+            $this->components->error("module is required");
             return;
         }
 
@@ -34,24 +34,25 @@ class CreateTraitsCommand extends Command
 
         $GeneratePath = "{$traitsPathFolder}{$trait}.php";
 
-        if (!is_dir($traitsPathFolder)) {
-            if (!mkdir($traitsPathFolder, 0755, true)) {
-                throw new \Exception("Failed to create directory: Traits Folder");
-                exit;
-            }
-        }
-
         if (is_dir($moduleFolder)) {
+
+            if (!is_dir($traitsPathFolder)) {
+                if (!mkdir($traitsPathFolder, 0755, true)) {
+                    throw new \Exception("Failed to create directory: Traits Folder");
+                    exit;
+                }
+            }
+
             if (file_exists($GeneratePath)) {
-                $this->error("Trait {$trait} in {$module} already exists");
+                $this->components->error("Trait [{$GeneratePath}] already exists.");
             } else {
                 $generator->createFile($module, $GeneratePath, $trait, 'traits');
                 if (file_exists($GeneratePath)) {
-                    $this->info("Created Trait {$trait} in {$module} module");
+                    $this->components->info("Created Trait [{$GeneratePath}] successfully.");
                 }
             }
         } else {
-            $this->error("Module {$module} doesn't exists");
+            $this->components->error("Module [{$module}] doesn't exists.");
         }
     }
 }

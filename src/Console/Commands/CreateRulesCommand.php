@@ -21,7 +21,7 @@ class CreateRulesCommand extends Command
         $rule = ucfirst($this->argument('rule'));
 
         if (empty($module)) {
-            $this->error("module is required");
+            $this->components->error("module is required");
             return;
         }
 
@@ -35,24 +35,23 @@ class CreateRulesCommand extends Command
 
         $GeneratePath = "{$rulesPathFolder}{$rule}.php";
 
-        if (!is_dir($rulesPathFolder)) {
-            if (!mkdir($rulesPathFolder, 0755, true)) {
-                throw new \Exception("Failed to create directory: Rules Folder");
-                exit;
-            }
-        }
-
         if (is_dir($moduleFolder)) {
+            if (!is_dir($rulesPathFolder)) {
+                if (!mkdir($rulesPathFolder, 0755, true)) {
+                    throw new \Exception("Failed to create directory: Rules Folder");
+                    exit;
+                }
+            }
             if (file_exists($GeneratePath)) {
-                $this->error("Rule {$rule} in {$module} already exists");
+                $this->components->error("Rule [{$GeneratePath}] already exists.");
             } else {
                 $generator->createFile($module, $GeneratePath, $rule, 'rules');
                 if (file_exists($GeneratePath)) {
-                    $this->info("Created Rule {$rule} in {$module} module");
+                    $this->components->info("Created Rule [{$GeneratePath}] successfully.");
                 }
             }
         } else {
-            $this->error("Module {$module} doesn't exists");
+            $this->components->error("Module [{$module}] doesn't exists.");
         }
     }
 }

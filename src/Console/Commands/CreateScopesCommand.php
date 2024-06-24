@@ -5,12 +5,12 @@ namespace Redux\Modular\Console\Commands;
 use Illuminate\Console\Command;
 use Redux\Modular\Console\Generators\FileGenerator;
 
-class CreateImportCommand extends Command
+class CreateScopesCommand extends Command
 {
-    protected $signature = 'redux:make-import
+    protected $signature = 'redux:make-scope
     {module      : The name of the module}
-    {import      : The name of the import}';
-    protected $description = 'Create new module import';
+    {scope       : The name of the scope}';
+    protected $description = 'Create new module scope';
 
     public function handle()
     {
@@ -18,7 +18,8 @@ class CreateImportCommand extends Command
 
         $module = ucfirst($this->argument('module'));
 
-        $import = ucfirst($this->argument('import'));
+        $scope = ucfirst($this->argument('scope'));
+
         if (empty($module)) {
             $this->components->error("module is required");
             return;
@@ -29,28 +30,28 @@ class CreateImportCommand extends Command
         $modulesPathFolder = rtrim($module_path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $moduleFolder = $modulesPathFolder . $module;
 
-        $importPathFolder =  $moduleFolder . "/App/Imports/";
+        $scopesPathFolder =  $moduleFolder . "/App/Models/Scopes/";
 
-        $GeneratePath = "{$importPathFolder}{$import}.php";
+        $GeneratePath = "{$scopesPathFolder}{$scope}.php";
 
         if (is_dir($moduleFolder)) {
-            if (!is_dir($importPathFolder)) {
-                if (!mkdir($importPathFolder, 0755, true)) {
-                    throw new \Exception("Failed to create directory: Imports Folder");
+            if (!is_dir($scopesPathFolder)) {
+                if (!mkdir($scopesPathFolder, 0755, true)) {
+                    throw new \Exception("Failed to create directory: Scopes Folder");
                     exit;
                 }
             }
 
             if (file_exists($GeneratePath)) {
-                $this->components->error("Import [{$GeneratePath}] already exists.");
+                $this->components->error("Scope [{$GeneratePath}] already exists.");
             } else {
-                $generator->createFile($module, $GeneratePath, $import, 'imports');
+                $generator->createFile($module, $GeneratePath, $scope, 'scopes');
                 if (file_exists($GeneratePath)) {
-                    $this->components->info("Created Import [{$GeneratePath}] successfully.");
+                    $this->components->info("Created Scope [{$GeneratePath}] Successfully.");
                 }
             }
         } else {
-            $this->components->error("Module [{$module}] doesn't exists.");
+            $this->components->error("Module [{$module}] doesn't exists");
         }
     }
 }

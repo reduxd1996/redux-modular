@@ -5,12 +5,12 @@ namespace Redux\Modular\Console\Commands;
 use Illuminate\Console\Command;
 use Redux\Modular\Console\Generators\FileGenerator;
 
-class CreateImportCommand extends Command
+class CreateRepositoryCommand extends Command
 {
-    protected $signature = 'redux:make-import
+    protected $signature = 'redux:make-repository
     {module      : The name of the module}
-    {import      : The name of the import}';
-    protected $description = 'Create new module import';
+    {repository  : The name of the repository}';
+    protected $description = 'Create new module repository';
 
     public function handle()
     {
@@ -18,7 +18,7 @@ class CreateImportCommand extends Command
 
         $module = ucfirst($this->argument('module'));
 
-        $import = ucfirst($this->argument('import'));
+        $repository = ucfirst($this->argument('repository'));
         if (empty($module)) {
             $this->components->error("module is required");
             return;
@@ -29,24 +29,24 @@ class CreateImportCommand extends Command
         $modulesPathFolder = rtrim($module_path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $moduleFolder = $modulesPathFolder . $module;
 
-        $importPathFolder =  $moduleFolder . "/App/Imports/";
+        $repositoryPathFolder =  $moduleFolder . "/App/Repositories/";
 
-        $GeneratePath = "{$importPathFolder}{$import}.php";
+        $GeneratePath = "{$repositoryPathFolder}{$repository}.php";
 
         if (is_dir($moduleFolder)) {
-            if (!is_dir($importPathFolder)) {
-                if (!mkdir($importPathFolder, 0755, true)) {
-                    throw new \Exception("Failed to create directory: Imports Folder");
+            if (!is_dir($repositoryPathFolder)) {
+                if (!mkdir($repositoryPathFolder, 0755, true)) {
+                    throw new \Exception("Failed to create directory: Repositories Folder");
                     exit;
                 }
             }
 
             if (file_exists($GeneratePath)) {
-                $this->components->error("Import [{$GeneratePath}] already exists.");
+                $this->components->error("Repository [{$GeneratePath}] already exists.");
             } else {
-                $generator->createFile($module, $GeneratePath, $import, 'imports');
+                $generator->createFile($module, $GeneratePath, $repository, 'repositories');
                 if (file_exists($GeneratePath)) {
-                    $this->components->info("Created Import [{$GeneratePath}] successfully.");
+                    $this->components->info("Created [{$GeneratePath}] successfully.");
                 }
             }
         } else {

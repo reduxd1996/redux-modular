@@ -1,0 +1,7 @@
+<?php
+
+namespace {{namespace}}App\Repositories;
+
+class {{class}} {
+
+}

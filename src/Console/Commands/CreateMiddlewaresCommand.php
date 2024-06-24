@@ -21,7 +21,7 @@ class CreateMiddlewaresCommand extends Command
 
         $middleware = ucfirst($this->argument('middleware'));
         if (empty($module)) {
-            $this->error("module is required");
+            $this->components->error("module is required");
             return;
         }
 
@@ -34,24 +34,24 @@ class CreateMiddlewaresCommand extends Command
 
         $GeneratePath = "{$middlewaresPathFolder}{$middleware}.php";
 
-        if (!is_dir($middlewaresPathFolder)) {
-            if (!mkdir($middlewaresPathFolder, 0755, true)) {
-                throw new \Exception("Failed to create directory: Middlewares Folder");
-                exit;
-            }
-        }
-
         if (is_dir($moduleFolder)) {
+            if (!is_dir($middlewaresPathFolder)) {
+                if (!mkdir($middlewaresPathFolder, 0755, true)) {
+                    throw new \Exception("Failed to create directory: Middlewares Folder");
+                    exit;
+                }
+            }
+
             if (file_exists($GeneratePath)) {
-                $this->error("Middleware {$middleware} in {$module} already exists");
+                $this->components->error("Middleware [{$GeneratePath}] already exists.");
             } else {
                 $generator->createFile($module, $GeneratePath, $middleware, 'middlewares');
                 if (file_exists($GeneratePath)) {
-                    $this->info("Created middleware {$middleware} in {$module} module");
+                    $this->components->info("Created middleware [{$GeneratePath}] successfully.");
                 }
             }
         } else {
-            $this->error("Module {$module} doesn't exists");
+            $this->components->error("Module [{$module}] doesn't exists.");
         }
     }
 }
