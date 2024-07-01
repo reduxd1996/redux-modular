@@ -52,6 +52,20 @@ php artisan redux:make-module <Module>
 
 This command will generate the necessary folders and files for your module.
 
+You can now generate repository, trait, interface, or service or combined when you generate module with "--width" flag, using the following command: 
+
+```
+php artisan redux:make-module <Module> --with=trait
+```
+
+or with multiple files 
+
+```
+php artisan redux:make-module <Module> --with=trait,service,interface
+```
+
+It will generate standardized name like ModuleNameInterface, ModuleNameService etc...
+
 # Create Controllers
 
 To create a controller, use the following command:
@@ -109,13 +123,37 @@ php artisan redux:make-resource <Module> <ResourceName>
 
 # Create Services
 
-To create a new resource within a module, use the following command:
+To create a new service within a module, use the following command:
 
 ```
 php artisan redux:make-service <Module> <ServiceName>
 ```
 
-# Create Tests
+# Create Repositories
+
+To create a new repository within a module, use the following command:
+
+```
+php artisan redux:make-repository <Module> <RepositoryName>
+```
+
+# Create Interface
+
+To create a new interface within a module, use the following command:
+
+```
+php artisan redux:make-interface <Module> <InteraceName>
+```
+
+# Create Traits
+
+To create a new trait within a module, use the following command:
+
+```
+php artisan redux:make-trait <Module> <TraitName>
+```
+
+<!-- # Create Tests
 
 To create a new feature tests within a module, use the following command:
 
@@ -127,7 +165,7 @@ If you want to create a new unit tests within a module, use the following comman
 
 ```
 php artisan redux:make-test <Module> <TestName> --unit
-```
+``` -->
 
 ## License
 

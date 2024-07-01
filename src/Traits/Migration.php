@@ -18,9 +18,10 @@ trait Migration {
                 $migration['table_name'] = '';
             }
         } else {
-            $migration['stub'] = 'normalmigrations';
+            $migration['stub'] = (empty($table_name)) ? 'normalmigrations' : 'updatemigrations';
             $migration['table_name'] = '';
         }
+
         return [
             'file_name' => strtolower(date('Y_m_d_hmi') . '_' . $migration_name),
             'table_name' => strtolower($this->pluralizeTableName($migration['table_name'], $table_name)),

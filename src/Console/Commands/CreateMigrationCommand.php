@@ -21,7 +21,7 @@ class CreateMigrationCommand extends Command
         $module_path = config('redux-modular.modulePath');
 
         $module = ucfirst($this->argument('module'));
-        $migration = ucfirst($this->argument('migration'));
+        $migration = $this->argument('migration');
         $table = $this->option('table');
 
         if (empty($module)) {
